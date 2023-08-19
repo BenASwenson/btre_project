@@ -145,5 +145,10 @@ MESSAGE_TAGS = {
 # EMAIL_PORT = 465
 # EMAIL_HOST_USER = 'info@benswenson.net'
 # EMAIL_HOST_PASSWORD = 'WorcesterMan77'
-# EMAIL_USE_SSL = True
+# EMAIL_USE_SSL = 
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
 
