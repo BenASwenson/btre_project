@@ -1,9 +1,9 @@
 # Python Django Dev to Deployment
 
-### Build and Deploy a real estate application using Django framework & PostgreSQL
+### Build and deploy a real estate application using Django framework & PostgreSQL
 ---
 
-##### Take a basic HTML/CSS Bootstrap theme and turn it into a real working application with an admin area to manage resources, including property listings, realtors, and contact inquiries.
+##### Take a basic HTML/CSS Bootstrap theme and turn it into a real working application with an admin area to manage resources, such as property listings, realtors, and contact inquiries.
 
 ---
 - make a directory for project
@@ -38,7 +38,9 @@
 <img src="/readme_img/image-5.png" width="300">
 - Now 'index' view is working:
 <img src="/readme_img/image-6.png" width="300">
-### Pages Templates & Base Layout
+
+### pages, templates & base layout
+
 - in settings.py inform where directories for templates will be located:
 <img src="/readme_img/image-7.png" width="400">
 - create a 'templates' directory
@@ -55,7 +57,8 @@
 <img src="/readme_img/image-13.png" width="300">
 - extend base.html to about.html:
 <img src="/readme_img/image-14.png" width="300">
-### Static Files & Paths
+
+### static files & paths
 - add directory 'static' within btre_project/btre
 - copy assets (css, img, js, webfonts) into 'static'
 - in btre/settings ‘STATIC_URL’:
