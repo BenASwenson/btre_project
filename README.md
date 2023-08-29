@@ -66,12 +66,14 @@
 <img src="/readme_img/image-15.png" width="400">
 - add static files
 `(venv) /btre_project>python manage.py collectstatic`
+
 ### Bootstrap layout markup
 - in base.html, at the top, we can add:
 <img src="/readme_img/image-16.png" width="200">
 - for href attributes where input of static files, open a template tag, use 'static' keyword, and wrap path in quotes:
 <img src="/readme_img/image-17.png" width="400">
 <img src="/readme_img/image-18.png" width="400">
+
 ### Partials
 - create directory in 'templates' called 'partials'.
   - inside create '_footer.html', '_navbar.html', '_topbar.html':
@@ -79,6 +81,7 @@
 - copy/paste footer into _footer.html, navabar into _navbar.html, and topbar into _topbar.html.
 - in base.html replace sections:
 <img src="/readme_img/image-20.png" width="300">
+
 ### Listings, Realtors URLs & Templates
 - create app 'listings'
 `(venv) /btre_project>python manage.py startapp listings`
@@ -94,6 +97,7 @@
 <img src="/readme_img/image-23.png" width="400">
 - in btre/settings.py, in INSTALLED_APPS, add app definitions for listings and realtors:
 <img src="/readme_img/image-24.png" width="200">
+
 ### create view methods
 - in listings/views.py create index, listing and search methods:
 <img src="/readme_img/image-25.png" width="400">
@@ -102,11 +106,13 @@
 <img src="/readme_img/image-27.png" width="400">
 - Now that it’s all working, add sections with listings between the navbar and footer instead of the ‘Listings’ temporary header:
 <img src="/readme_img/image-28.png" width="400">
+
 ### Install Postgres & PgAdmin
 - choose latest version and download graphical installer
 <img src="/readme_img/image-29.png" width="400">
 - Use PgAdmin to create a database, 'btredb':
 <img src="/readme_img/image-30.png" width="200">
+
 ### Django Postgres Setup & Migrate
 `(venv) /btre_project>pip install psycopg2`
 `(venv) /btre_project>pip install psycopg2-binary`
@@ -142,6 +148,7 @@
 <img src="/readme_img/image-41.png" width="400">
 <img src="/readme_img/image-42.png" width="400">
 <img src="/readme_img/image-43.png" width="400">
+
 ### Media Folder - add media folder settings
 <img src="/readme_img/image-44.png" width="400">
 - in btre/urls.py, import ‘settings’ & ‘static’ and configure MEDIA_ROOT and MEDIA_URL: 
@@ -150,6 +157,7 @@
 <img src="/readme_img/image-46.png" width="400"> 
 - create Listings in admin
 <img src="/readme_img/image-47.png" width="400"> 
+
 ### Admin and CSS
 - create ‘admin’ directory with ‘base_site.html’ in ‘templates’.
   - extend the admin base template and since using a logo image, load ‘static’: 
@@ -176,6 +184,7 @@
 <img src="/readme_img/image-59.png" width="400">
 - pagination setting in admin – list_per_page 
 <img src="/readme_img/image-60.png" width="400">
+
 ### pull data from Listing model
   - fetch listings using model, then insert it into template, then loop through and output listings that are in the database. 
   - in listings/views.py, 
@@ -195,24 +204,29 @@
 <img src="/readme_img/image-67.png" width="300">
 - to access the functions from humanize use the pipe symbol between the field and function:
 <img src="/readme_img/image-68.png" width="300">
+
 ### pagination
 - start by wrapping the unordered list with an if statement which determines if listings hasn’t any more pages than what we specify, pagination won’t show: 
 <img src="/readme_img/image-69.png" width="400">
 <img src="/readme_img/image-70.png" width="400">
+
 ### order listing by date
 - instead of ‘objects.all’ we want to ‘order_by’, and pass in ‘list_date’ with a ‘-’ for descending: 
 <img src="/readme_img/image-72.png" width="400">
 - to make sure the listings in the database whose ‘is_published’ value is ‘False’ don’t populate in listings.html, use a filter: 
 <img src="/readme_img/image-74.png" width="400">
+
 ### home page dynamic content - views.py
 - import Listing
 - order by list date
 - filter those that are published
 - limit to 3 listings
 <img src="/readme_img/image-75.png" width="400">
+
 ### home page dynamic content - index.html
 <img src="/readme_img/image-76.png" width="600">
 <img src="/readme_img/image-77.png" width="600">
+
 ### about page dynamic content 
 - views.py
 <img src="/readme_img/image-79.png" width="400">
@@ -221,6 +235,7 @@
 <img src="/readme_img/image-80.png" width="600">
   - Seller of the Month
 <img src="/readme_img/image-81.png" width="600">
+
 ### single listing page 
 - listings/views.py
   - to use ‘get_object_or_404’ need to import
@@ -231,6 +246,7 @@
 <img src="/readme_img/image-85.png" width="500">
 <img src="/readme_img/image-86.png" width="500">
 <img src="/readme_img/image-87.png" width="500">
+
 ### search form choices
 - opt to shorten the markup of the home page – currently all options for search are embedded in index.html, but we can store these elsewhere in a dictionary and call when needed
 - in ‘listings’ directory create ‘choices.py’ and in it create dictionaries for (bedroom, price, state): 
@@ -258,6 +274,7 @@
 <img src="/readme_img/image-99.png" width="400">
 - in templates/listings/search.html and again delete all hardcoded options and loop to access as before:
 <img src="/readme_img/image-100.png" width="600">
+
 ### search form filtering
 - any field filled in when submitted, first check if the field exists.  Then pull it out of the request and put it into a variable and base queryset on the filtering of the variable.  This will be done in listings/views.py in the ‘search’ method: 
 <img src="/readme_img/image-101.png" width="400">
@@ -266,6 +283,7 @@
 <img src="/readme_img/image-103.png" width="400">
 - within the search function of listings/views.py, start adding some filters (keyword, city, state, bedroom, max price): 
 <img src="/readme_img/image-104.png" width="600">
+
 ### preserving form input
 - In listings/views.py/search let’s add to the dictionary ‘context’ a variable ‘values’ with a value ‘request.GET’: 
 <img src="/readme_img/image-105.png" width="400">
@@ -275,6 +293,7 @@
 <img src="/readme_img/image-108.png" width="400">
 <img src="/readme_img/image-109.png" width="400">
 <img src="/readme_img/image-110.png" width="400">
+
 ### Accounts App & URLs
 - create a seperate app 'accounts'
 `(venv) /btre_project>python manage.py startapp accounts`
@@ -303,6 +322,7 @@
 <img src="/readme_img/image-120.png" width="400">
   - after filling in the registration form, the terminal prints ‘SUBMITTED REG’:
 <img src="/readme_img/image-121.png" width="400">
+
 ### Message Alerts
 - in btre/settings.py:
 <img src="/readme_img/image-122.png" width="400">
@@ -320,12 +340,15 @@
 <img src="/readme_img/image-128.png" width="400">
   - since this is in the static folder in btre, run ‘collectstatic’ so that it goes into the main static folder:
 `(venv) btre_project>python manage.py collectstatic`
+
 ### User Registration
 - in accounts/views.py, in the register method, implement logic to register user now that testing the error message is finished: 
 <img src="/readme_img/image-129.png" width="600">
+
 ### User Login
 - in accounts/views.py/login
 <img src="/readme_img/image-130.png" width="600">
+
 ### Logout & navbar auth links
 - fill in markup for ‘dashboard.html’, in Breadcrumb add dynamic href attribute:
 <img src="/readme_img/image-131.png" width="600">
@@ -334,6 +357,7 @@
 <img src="/readme_img/image-133.png" width="500">
 - in accounts/views.py complete the logout method:
 <img src="/readme_img/image-134.png" width="400">
+
 ### Dynamic page titles
 - in templates/base.html add a block within the title tag: 
 <img src="/readme_img/image-135.png" width="400">
@@ -348,6 +372,7 @@
 *do similar for: dashboard.html, login.html, register.html.*
 - in templates/listings/listing.html dynamically add the title for a particular listing:
 <img src="/readme_img/image-140.png" width="400">
+
 ### Contacts app & model
 - create 'contacts' app:
 `(venv) /btre_project>python manage.py startapp contacts`
@@ -361,6 +386,7 @@
 `(venv) /btre_project>python manage.py migrate`
 - register ‘Contact’ model in contacts/admin.py:
 <img src="/readme_img/image-143.png" width="400">
+
 ### Contact form prep
 - in templates/listings/listing.html: 
   - add ‘action’ and ‘method’ attributes to form tag
@@ -383,12 +409,14 @@
 <img src="/readme_img/image-150.png" width="300">
 - in contacts/views.py import ‘send_mail’: 
 <img src="/readme_img/image-151.png" width="300">
+
 ### Dashboard functionality
 - in accounts/views.py flesh out the dashboard function which gathers contacts.  First, import Contact from contacts.models: 
 <img src="/readme_img/image-152.png" width="300">
 <img src="/readme_img/image-153.png" width="600">
 - in templates/accounts/dashboard.html make dynamic where necessary.  Just before the table use a conditional to determine if there are any contacts for this user.  If so, use a for loop in the table body to print id, listing and button linking to the listing. In else statement indicate there aren’t any contacts: 
 <img src="/readme_img/image-154.png" width="600">
+
 ### Django deployment to Ubuntu
 *Any commands with "$" at the beginning run on your local machine and any "#" run when logged into the server*
 - sign up to account with Digital Ocean (create Droplet)
@@ -433,6 +461,7 @@ PasswordAuthentication no
 ```
 reload sshd service
 `# sudo systemctl reload sshd`
+
 #### Simple Firewall Setup
 - See which apps are registered with the firewall
 `# sudo ufw app list`
@@ -442,6 +471,7 @@ reload sshd service
 `# sudo ufw enable`
 - check status
 `# sudo ufw status`
+
 #### Software
 - update packages
 ```
@@ -467,6 +497,7 @@ ALTER ROLE dbadmin SET timezone TO 'UTC';
 `GRANT ALL PRIVILEGES ON DATABASE btre_prod TO dbadmin;`
 - Quit out of Postgres
 `\q`
+
 #### Virtual Environment
 - install the python3-venv package
 `# sudo apt install python3-venv`
@@ -479,6 +510,7 @@ ALTER ROLE dbadmin SET timezone TO 'UTC';
 `# python3 -m venv ./venv` 
 - activate the environment
 `# source venv/bin/activate`
+
 #### Git & Upload
 - Pip dependencies
   - from local machine, create requirements.txt with app dependencies. Push this to repo
@@ -487,6 +519,7 @@ ALTER ROLE dbadmin SET timezone TO 'UTC';
 `# git clone https://github.com/yourgithubname/btre_project.git`
 - install pip modules from requirements
 `# pip install -r requirements.txt`
+
 #### Local Settings Setup
 - Add code to your settings.py file and push to server
 ```
@@ -507,31 +540,41 @@ except ImportError:
 # python manage.py makemigrations
 # python manage.py migrate
 ```
+
 #### Create super user
 `# python manage.py createsuperuser`
+
 #### create static files
 `python manage.py collectstatic`
+
 #### Create exception for port 8000
 `# sudo ufw allow 8000`
+
 #### Run Server
 `# python manage.py runserver 0.0.0.0:8000`
+
 #### Test the site at YOUR_SERVER_IP:8000
 - add some data in the admin area
+
 ### Gunicorn Setup
 - install gunicorn
 `# pip install gunicorn`
 - add to requirements.txt
 `# pip freeze > requirements.txt`
+
 #### Test Gunicorn serve
 `# gunicorn --bind 0.0.0.0:8000 btre.wsgi`
 *images, etc will be gone*
+
 #### stop server & deactivate virtual env
 ```
 ctrl-c
 # deactivate
 ```
+
 #### open gunicorn.socket file
 `# sudo nano /etc/systemd/system/gunicorn.socket`
+
 #### copy this code, paste it in and save
 ```
 [Unit]
@@ -543,8 +586,10 @@ ListenStream=/run/gunicorn.sock
 [Install]
 WantedBy=sockets.target
 ```
+
 #### open gunicorn.service file
 `# sudo nano /etc/systemd/system/gunicorn.service`
+
 #### Copy this code, paste it in and 
 ```
 [Unit]
@@ -565,15 +610,19 @@ ExecStart=/home/djangoadmin/pyapps/venv/bin/gunicorn \
 [Install]
 WantedBy=multi-user.target
 ```
+
 #### start and enable Gunicorn socket
 ```
 # sudo systemctl start gunicorn.socket
 # sudo systemctl enable gunicorn.socket
 ```
+
 #### check status of Gunicorn
 `# sudo systemctl status gunicorn.socket`
+
 #### check the existence of gunicorn.sock
 `# file /run/gunicorn.sock`
+
 ### NGINX setup
 - Create project folder
 `# sudo nano /etc/nginx/sites-available/btre_project`
@@ -598,12 +647,16 @@ server {
     }
 }
 ```
+
 #### enable the file by linking to the sites-enabled dir
 `# sudo ln -s /etc/nginx/sites-available/btre_project /etc/nginx/sites-enabled`
+
 #### test NGINX config
 `# sudo nginx -t`
+
 #### restart NGINX
 `# sudo systemctl restart nginx`
+
 #### remove port 8000 from firewall and open up firewall to allow normal traffic on port 80
 ```
 # sudo ufw delete allow 8000
@@ -611,25 +664,32 @@ server {
 ```
 ---
 *probably need to up the max upload size to be able to create listings with images*
+
 #### open up nginx conf file
 `# sudo nano /etc/nginx/nginx.conf`
 
 ---
+
 #### add to http{} area:
 `client_max_body_size 20M;`
+
 #### reload NGINX
 `# sudo systemctl restart nginx`
+
 #### media file issue
 *may have issues with images not showing up. Delete all data, start fresh and remove the "photos" folder in the "media folder":*
 `# sudo rm -rf media/photos`
+
 ### domain setup
 - go to domain registrar, create the following A record:
 ```
 @  A Record  YOUR_IP_ADDRESS
 www  CNAME  example.com
 ```
+
 #### go to local_settings.py on the server, change "ALLOWED_HOSTS" to include the domain
 `ALLOWED_HOSTS = ['IP_ADDRESS', 'example.com', 'www.example.com']`
+
 #### edit /etc/nginx/sites-available/btre_project:
 ```
 server {
@@ -637,6 +697,7 @@ server {
     server_name xxx.xxx.xxx.xxx example.com www.example.com;
 }
 ```
+
 #### reload NGINX & Gunicorn
 ```
 # sudo systemctl restart nginx
